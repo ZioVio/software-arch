@@ -52,11 +52,11 @@ class Illness(models.Model):
     duration = models.IntegerField(verbose_name='Duration in days')
     consequences = models.CharField(max_length=NAME_MAX_LENGTH)
     drug1_code = models.ForeignKey(Drug, to_field='code', on_delete=models.deletion.SET_NULL, null=True,
-                                   related_name='smth1')
+                                   related_name='code1')
     drug2_code = models.ForeignKey(Drug, to_field='code', on_delete=models.deletion.SET_NULL, null=True,
-                                   related_name='smth2')
+                                   related_name='code2')
     drug3_code = models.ForeignKey(Drug, to_field='code', on_delete=models.deletion.SET_NULL, null=True,
-                                   related_name='smth3')
+                                   related_name='code3')
 
 
 class Patient(models.Model):
