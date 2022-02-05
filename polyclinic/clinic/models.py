@@ -68,3 +68,5 @@ class Patient(models.Model):
     appointment_date = models.DateTimeField()
     illness_code = models.ForeignKey(Illness, to_field='code', on_delete=models.deletion.SET_NULL, null=True)
     employee_code = models.ForeignKey(Employee, to_field='code', on_delete=models.deletion.SET_NULL, null=True)
+
+
