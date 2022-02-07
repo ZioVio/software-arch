@@ -1,14 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% for pos in positions %}
-<p>
-    {{pos}}
-</p>
-{% endfor %}
-</body>
-</html>
+{% include 'clinic/_head.html'%}
+<div class="container-fluid mb-4">
+    <header class="d-flex justify-content-center py-3 shadow-sm">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Employee department</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Illnesses</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Patients</a></li>
+        </ul>
+    </header>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="list-group">
+                {% for pos in all_positions %}
+                <a href="/clinic/employment_department/{{pos.code}}"
+                   class="list-group-item list-group-item-action {% if pos.code == position_code %}active{% endif %}">
+                    {{pos.name}}
+                </a>
+                {% endfor %}
+            </div>
+            <button class="btn btn-light mt-2"><a href="/clinic/employment_department">Reset</a></button>
+        </div>
+        <div class="col-9">
+            {% for pos in positions %}
+            <div class="container-fluid card py-3 mb-5">
+                <h2>{{pos.name}}</h2>
+                <table class="table">
+                    <tr>
+                        <th>Code</th>
+                        <td>{{pos.code}}</td>
+                    </tr>
+                    <tr>
+                        <th>Salary</th>
+                        <td>{{pos.compensation}}</td>
+                    </tr>
+                    <tr>
+                        <th>Duties</th>
+                        <td>{{pos.duties}}</td>
+                    </tr>
+                    <tr>
+                        <th>Requirements</th>
+                        <td>{{pos.requirements}}</td>
+                    </tr>
+                    <tr>
+                        <th>Requirements</th>
+                        <td>{{pos.requirements}}</td>
+                    </tr>
+                </table>
+                <h3>Employees</h3>
+                {% for emp in pos.employees %}
+                <div class="card my-2">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="d-flex justify-content-center pt-2">
+                                <image src="https://i.pravatar.cc/50" class="rounded"></image>
+                            </div>
+                        </div>
+                        <div class="col flex-grow-1">
+                            <table class="table">
+                                <tr>
+                                    <th>Code</th>
+                                    <td>{{emp.code}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Fullname</th>
+                                    <td>{{emp.fullname}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Sex</th>
+                                    <td>{{emp.sex}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Birthday</th>
+                                    <td>{{emp.birthday|date:"M d, Y"}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Address</th>
+                                    <td>{{emp.address}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone number</th>
+                                    <td>{{emp.phone_number}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Person ID</th>
+                                    <td>{{emp.person_id}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% include 'clinic/_tail.html'%}

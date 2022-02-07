@@ -13,7 +13,7 @@ def index(request):
 
 
 def employment_department_handler(request, position_code=None):
-    print(position_code)
+    all_positions = Position.objects.all()
     positions = dict_from_queryset(
         Position.objects.all() if position_code is None else Position.objects.filter(code=position_code)
     )
@@ -21,9 +21,10 @@ def employment_department_handler(request, position_code=None):
         pos_employees = dict_from_queryset(Employee.objects.filter(position_code=p['code']))
         p['employees'] = pos_employees
 
-    print(positions)  # dict of needed info
     context = {
-        'positions': positions
+        'positions': positions,
+        'all_positions': all_positions,
+        'position_code': position_code,
     }
 
     return HttpResponse(render(request, 'clinic/epm_dep.html', context))
