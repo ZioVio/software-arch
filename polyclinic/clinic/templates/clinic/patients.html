@@ -1,0 +1,50 @@
+{% include 'clinic/_head.html'%}
+<div class="container-fluid mb-4">
+    <header class="d-flex justify-content-center py-3 shadow-sm">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/clinic/employment_department" class="nav-link">Employee department</a></li>
+            <li class="nav-item"><a href="/clinic/illnesses" class="nav-link">Illnesses</a></li>
+            <li class="nav-item"><a href="/clinic/patients" class="nav-link active">Patients</a></li>
+        </ul>
+    </header>
+</div>
+<div class="container">
+    <h1>Patients</h1>
+    {% for p in patients %}
+    <div class="container-fluid card py-3 mb-5">
+        <h2>{{p.fullname}}</h2>
+        <p>{{p}}</p>
+        <table class="table">
+            <tr>
+                <th>Birthdate</th>
+                <td>{{p.birthdate|date:"M d, Y"}}</td>
+            </tr>
+            <tr>
+                <th>Sex</th>
+                <td>{{p.sex}}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{p.address}}</td>
+            </tr>
+            <tr>
+                <th>Phone number</th>
+                <td>{{p.phone_number}}</td>
+            </tr>
+            <tr>
+                <th>Appointment date</th>
+                <td>{{p.appointment_date|date:"M d, Y"}}</td>
+            </tr>
+            <tr>
+                <th>Illness</th>
+                <td>{{p.illness.name}}</td>
+            </tr>
+            <tr>
+                <th>Doctor</th>
+                <td><a href="/clinic/doctor_patients/{{p.doctor.code}}">{{p.doctor.fullname}}</a></td>
+            </tr>
+        </table>
+    </div>
+    {% endfor %}
+</div>
+{% include 'clinic/_tail.html'%}

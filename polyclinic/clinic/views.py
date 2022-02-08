@@ -80,8 +80,10 @@ def patients_handler(request):
         p['doctor'] = dict_from_queryset(Employee.objects.filter(code=p['employee_code_id']))[0]
         p['illness'] = dict_from_queryset(Illness.objects.filter(code=p['illness_code_id']))[0]
 
-    # todo replace this html with an actual one later
-    return HttpResponse(render(request, 'clinic/epm_dep.html', {'positions': patients}))
+    context = {
+        'patients': patients,
+    }
+    return HttpResponse(render(request, 'clinic/patients.html', context))
 
 
 def doctor_patients_handler(request, doctor_code=None):
@@ -95,5 +97,4 @@ def doctor_patients_handler(request, doctor_code=None):
     doctor_dict['patients'] = dict_from_queryset(
         Patient.objects.filter(employee_code_id=doctor_dict['code'])
     )
-    print(doctor_dict)
     return HttpResponse(doctor_dict)
