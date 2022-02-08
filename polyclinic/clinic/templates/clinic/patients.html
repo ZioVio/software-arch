@@ -13,7 +13,6 @@
     {% for p in patients %}
     <div class="container-fluid card py-3 mb-5">
         <h2>{{p.fullname}}</h2>
-        <p>{{p}}</p>
         <table class="table">
             <tr>
                 <th>Birthdate</th>
@@ -33,7 +32,7 @@
             </tr>
             <tr>
                 <th>Appointment date</th>
-                <td>{{p.appointment_date|date:"M d, Y"}}</td>
+                <td>{{p.appointment_date}}</td>
             </tr>
             <tr>
                 <th>Illness</th>
@@ -41,7 +40,7 @@
             </tr>
             <tr>
                 <th>Doctor</th>
-                <td><a href="/clinic/doctor_patients/{{p.doctor.code}}">{{p.doctor.fullname}}</a></td>
+                <td><a href="/clinic/doctors/{{p.doctor.code}}">{{p.doctor.fullname}}</a></td>
             </tr>
         </table>
     </div>

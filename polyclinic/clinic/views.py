@@ -97,4 +97,9 @@ def doctor_patients_handler(request, doctor_code=None):
     doctor_dict['patients'] = dict_from_queryset(
         Patient.objects.filter(employee_code_id=doctor_dict['code'])
     )
-    return HttpResponse(doctor_dict)
+
+    context = {
+        'doctor': doctor_dict,
+    }
+
+    return HttpResponse(render(request, 'clinic/doctor.html', context))

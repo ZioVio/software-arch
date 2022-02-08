@@ -1,0 +1,109 @@
+{% include 'clinic/_head.html'%}
+<div class="container-fluid mb-4">
+    <header class="d-flex justify-content-center py-3 shadow-sm">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/clinic/employment_department" class="nav-link">Employee department</a></li>
+            <li class="nav-item"><a href="/clinic/illnesses" class="nav-link">Illnesses</a></li>
+            <li class="nav-item"><a href="/clinic/patients" class="nav-link active">Patients</a></li>
+        </ul>
+    </header>
+</div>
+<div class="container">
+    <button class="btn btn-light"><a href="/clinic/patients">Back to patients</a></button>
+    <div class="d-flex mt-4">
+        <div class="d-flex justify-content-center align-items-center me-4">
+            <img src="https://i.pravatar.cc/50" class="rounded"/>
+        </div>
+        <div>
+            <h1>{{doctor.fullname}}</h1>
+        </div>
+    </div>
+    <table class="table mt-3">
+        <tr>
+            <th>Code</th>
+            <td>{{doctor.code}}</td>
+        </tr>
+        <tr>
+            <th>Sex</th>
+            <td>{{doctor.sex}}</td>
+        </tr>
+        <tr>
+            <th>Birthday</th>
+            <td>{{doctor.birthday|date:"M d, Y"}}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>{{doctor.address}}</td>
+        </tr>
+        <tr>
+            <th>Phone number</th>
+            <td>{{doctor.phone_number}}</td>
+        </tr>
+        <tr>
+            <th>Person ID</th>
+            <td>{{doctor.person_id}}</td>
+        </tr>
+    </table>
+    <h3>Patients</h3>
+    <ul class="list-group">
+        {% for p in doctor.patients %}
+        <li class="list-group-item">
+            <table class="table border">
+                <tr>
+                    <th>Fullname</th>
+                    <td>{{p.fullname}}</td>
+                </tr>
+                <tr>
+                    <th>Sex</th>
+                    <td>{{p.sex}}</td>
+                </tr>
+                <tr>
+                    <th>Phone number</th>
+                    <td>{{p.phone_number}}</td>
+                </tr>
+                <tr>
+                    <th>Appointment date</th>
+                    <td>{{p.appointment_date}}</td>
+                </tr>
+            </table>
+        </li>
+        {% endfor %}
+    </ul>
+    <!--    {% for p in patients %}-->
+    <!--    <div class="container-fluid card py-3 mb-5">-->
+    <!--        <h2>{{p.fullname}}</h2>-->
+    <!--        <p>{{p}}</p>-->
+    <!--        <table class="table">-->
+    <!--            <tr>-->
+    <!--                <th>Birthdate</th>-->
+    <!--                <td>{{p.birthdate|date:"M d, Y"}}</td>-->
+    <!--            </tr>-->
+    <!--            <tr>-->
+    <!--                <th>Sex</th>-->
+    <!--                <td>{{p.sex}}</td>-->
+    <!--            </tr>-->
+    <!--            <tr>-->
+    <!--                <th>Address</th>-->
+    <!--                <td>{{p.address}}</td>-->
+    <!--            </tr>-->
+    <!--            <tr>-->
+    <!--                <th>Phone number</th>-->
+    <!--                <td>{{p.phone_number}}</td>-->
+    <!--            </tr>-->
+    <!--            <tr>-->
+    <!--                <th>Appointment date</th>-->
+    <!--                <td>{{p.appointment_date|date:"M d, Y"}}</td>-->
+    <!--            </tr>-->
+    <!--            <tr>-->
+    <!--                <th>Illness</th>-->
+    <!--                <td>{{p.illness.name}}</td>-->
+    <!--            </tr>-->
+    <!--            <tr>-->
+    <!--                <th>Doctor</th>-->
+    <!--                <td><a href="/clinic/doctors/{{p.doctor.code}}">{{p.doctor.fullname}}</a></td>-->
+    <!--            </tr>-->
+    <!--        </table>-->
+    <!--    </div>-->
+    <!--    {% endfor %}-->
+</div>
+{% include 'clinic/_tail.html'%}
