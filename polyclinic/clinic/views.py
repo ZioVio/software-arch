@@ -31,15 +31,27 @@ def employment_department_handler(request, position_code=None):
 
 
 def illnesses_handler(request):
-    ill = dict_from_queryset(Illness.objects.all())
+    illnesses = dict_from_queryset(Illness.objects.all())
     drugs = dict_from_queryset(Drug.objects.all())
     for drug in drugs:
-        for il in ill:
+        for il in illnesses:
             drug_code = drug['code']
             for drug_field in ['drug1_code_id', 'drug2_code_id', 'drug3_code_id']:
                 if il[drug_field] == drug_code:
                     il[drug_field] = drug
-    return HttpResponse(ill)
+
+    for il in illnesses:
+        il['drugs'] = [
+            il['drug1_code_id'],
+            il['drug2_code_id'],
+            il['drug3_code_id'],
+        ]
+
+    context = {
+        'illnesses': illnesses,
+    }
+
+    return HttpResponse(render(request, 'clinic/illnesses.html', context))
 
 
 def illnesses_by_drugs_handler(request):
@@ -54,7 +66,11 @@ def illnesses_by_drugs_handler(request):
                         drug['cures'] = []
                     drug['cures'].append(il)
 
-    return HttpResponse(drugs)
+    context = {
+        'drugs': drugs,
+    }
+
+    return HttpResponse(render(request, 'clinic/illnesses.html', context))
 
 
 def patients_handler(request):

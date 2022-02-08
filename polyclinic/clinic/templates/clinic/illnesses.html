@@ -1,0 +1,97 @@
+{% include 'clinic/_head.html'%}
+<div class="container-fluid mb-4">
+    <header class="d-flex justify-content-center py-3 shadow-sm">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/clinic/employment_department" class="nav-link">Employee department</a></li>
+            <li class="nav-item"><a href="#" class="nav-link active">Illnesses</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Patients</a></li>
+        </ul>
+    </header>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="list-group">
+                <!--                   todo: look here at the flag-->
+                <a href="/clinic/illnesses_by_drugs"
+                   class="list-group-item list-group-item-action {% if drugs %} active {% endif %}">
+                    Group by drugs
+                </a>
+            </div>
+            <button class="btn btn-light mt-2"><a href="/clinic/illnesses">Reset</a></button>
+        </div>
+        <div class="col-9">
+            {% for ill in illnesses %}
+            <div class="container-fluid card py-3 mb-5">
+                <h2>{{ill.name}}</h2>
+                <table class="table">
+                    <tr>
+                        <th>Code</th>
+                        <td>{{ill.code}}</td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ill.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Symptoms</th>
+                        <td>{{ill.symptom}}</td>
+                    </tr>
+                    <tr>
+                        <th>Duration</th>
+                        <td>{{ill.duration}} day(s)</td>
+                    </tr>
+                    <tr>
+                        <th>Consequences</th>
+                        <td>{{ill.consequences}}</td>
+                    </tr>
+                </table>
+                <h3>Drugs</h3>
+                <ul class="list-group">
+                    {% for drug in ill.drugs %}
+                    <li class="list-group-item">{{drug.name}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+            {% for drug in drugs %}
+            <div class="container-fluid card py-3 mb-5">
+                <h2>{{drug.name}}</h2>
+                <table class="table">
+                    <tr>
+                        <th>Code</th>
+                        <td>{{drug.code}}</td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{drug.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Treatment indications</th>
+                        <td>{{drug.treatment_indications}}</td>
+                    </tr>
+                    <tr>
+                        <th>Contraindications</th>
+                        <td>{{drug.contraindications}}</td>
+                    </tr>
+                    <tr>
+                        <th>Package type</th>
+                        <td>{{drug.package_type}}</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td>{{drug.price}}</td>
+                    </tr>
+                </table>
+                <h3>Illnesses to cure</h3>
+                <ul class="list-group">
+                    {% for ill in drug.cures %}
+                    <li class="list-group-item">{{ill.name}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% include 'clinic/_tail.html'%}
